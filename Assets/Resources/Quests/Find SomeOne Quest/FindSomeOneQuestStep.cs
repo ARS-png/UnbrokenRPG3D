@@ -31,8 +31,17 @@ public class FindSomeOneQuestStep : QuestStep
         ChangeState(state);
     }
 
-    private void Find() // if find someone
+    private void Find(string name) // if find someone
     {
-        FinishQuestStep();
+        if (questId == name) 
+        {
+            FinishQuestStep();
+        }
+
+        else
+        {
+            Debug.LogWarning("Не совпадает");
+        }
+    
     }
 }

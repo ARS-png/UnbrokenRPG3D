@@ -113,7 +113,7 @@ Material:
     - _MaterialID: 1
     - _MaterialTypeMask: 2
     - _OpaqueCullMode: 2
-    - _OpaqueDepth: 4
+    - _OpaqueDepth: 4.19
     - _PerPixelSorting: 0
     - _QueueControl: 0
     - _QueueOffset: -2
@@ -124,7 +124,7 @@ Material:
     - _RefractionStrength: 0.015
     - _RenderQueueType: 3
     - _RequireSplitLighting: 0
-    - _RippleSpeed: 0.5
+    - _RippleSpeed: 0.2
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 0

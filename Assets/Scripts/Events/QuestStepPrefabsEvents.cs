@@ -8,9 +8,9 @@ using UnityEngine.InputSystem;
 public class QuestStepPrefabsEvents
 {
     public event Action onPlayerDetected;
-    public event Action onFindSomeOne;
+    public event Action<string> onFindSomeOne;
 
     public void DetectPlayer() => onPlayerDetected?.Invoke();
-    public void FindSomeOne() => onFindSomeOne?.Invoke();   
+    public void FindSomeOne(string name) => onFindSomeOne?.Invoke(name);   
 }
 

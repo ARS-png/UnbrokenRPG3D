@@ -7,7 +7,7 @@ public class MoveToPositionQuestStep : QuestStep
     private int movesToComplite = 5;
 
     private void Start()
-    {                                                                    
+    {
         GameEventsManager.instance.questStepPrefabsEvents.onPlayerDetected += DetectPlayer;
     }
 

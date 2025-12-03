@@ -4,7 +4,7 @@ public abstract class QuestStep : MonoBehaviour
 {
     private bool isFinished = false;
 
-    private string questId;
+    protected string questId;
 
     private int stepIndex;
 

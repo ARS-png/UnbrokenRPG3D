@@ -199,7 +199,7 @@ public class QuestManager : MonoBehaviour
       //добавить сохранини в QuestPoinit
               /*  GameEventsManager.instance.questEvents.QuestStateChange(quest);*///
 
-                Debug.Log("asufhasdkjlfhaslkjdfhaslkjdfh" + serializedData);
+                //Debug.Log("asufhasdkjlfhaslkjdfhaslkjdfh" + serializedData);
             }
             else
             {

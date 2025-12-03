@@ -1,10 +1,10 @@
-﻿using UnityEditor.SearchService;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Scene = UnityEngine.SceneManagement.Scene;
 using System;
-using UnityEditor.Build.Pipeline;// чтобы избежать неоднозначности
+/*using UnityEditor.Build.Pipeline;*/// чтобы избежать неоднозначности
 
 
 public class MusicSettings : MonoBehaviour

@@ -1,6 +1,6 @@
 #ifndef Water_Volume
 #define Water_Volume
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl";
+#include "Packages/com.unity.render.pipelines.universal/ShaderLibrary/Core.hlsl";
 
 CBUFFER_START(UnityPerMaterial)
 float4 _MainTex_ST; // Scale/offset дл€ текстуры
@@ -11,8 +11,8 @@ float3 bounds;
 CBUFFER_END
 
 // “екстуры и семплеры объ€вл€ютс€ отдельно
-TEXTURE2D(_MainTex);
-SAMPLER(sampler_MainTex);
+//TEXTURE2D(_MainTex);
+//SAMPLER(sampler_MainTex);
 
 float2 random2D(float2 UV, float offset)
 {
@@ -124,7 +124,7 @@ SurfaceDescription SurfaceDescriptionFunction(SurfaceDescriptionInputs IN)
     float distTravelled = 0;
     float stepSize = 0.5;
     int i = 0;
-    UNITY_LOOP
+    //UNITY_LOOP
         for (i = 0; i < 250 && distTravelled + distToBox < depth && distTravelled < distInBox; i++)
         {
             float shadowAtten = 1;

@@ -8,6 +8,7 @@ public class GameEventsManager : MonoBehaviour
     [HideInInspector] public TTSEvents tTSEvents;
     [HideInInspector] public AnimationEvents animationEvents;
     [HideInInspector] public QuestStepPrefabsEvents questStepPrefabsEvents;
+    [HideInInspector] public InventoryEvents inventoryEvents;
 
     public static GameEventsManager instance { get; private set; }
     private void Awake()
@@ -21,6 +22,7 @@ public class GameEventsManager : MonoBehaviour
             tTSEvents = new TTSEvents();
             animationEvents = new AnimationEvents();
             questStepPrefabsEvents = new QuestStepPrefabsEvents();
+            inventoryEvents = new InventoryEvents();
         }
         else
         {

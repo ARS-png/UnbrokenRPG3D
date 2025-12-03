@@ -8,7 +8,7 @@
 }
 
 = canStart
-    you can start the find someone quest
+    you can start the find someone quest#speaker:NPC2 #anim:Wave 
     ~StartQuest(FindSomeOneQuestId)
 - -> END
 
