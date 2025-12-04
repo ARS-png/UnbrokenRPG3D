@@ -1,22 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd44cc8cb8d42e2498c1405a0590f864, type: 3}
-  m_Name: FindSomeOneQuest
-  m_EditorClassIdentifier: 
-  QuestID: FindSomeOneQuest
-  QuestName: Move To This Position!
-  QuestDescription: Some Description
-  questPrerequisites: []
-  questStepPrefabs:
-  - {fileID: 1820349147742594091, guid: 16e9461cd2e5986429af03c8d250e9af, type: 3}
-  goldReward: 0
-  experienceReward: 0
+version https://git-lfs.github.com/spec/v1
+oid sha256:1b6dcbcaf7475d19e16cdab58b4d66e8bdb51198b14f998d58c8a41ec6c085d2
+size 672
