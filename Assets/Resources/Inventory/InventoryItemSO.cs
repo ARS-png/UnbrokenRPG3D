@@ -7,7 +7,7 @@ public class InventoryItemSO : ScriptableObject
     public int amount;
     public string itemType;
     public string itemId;
-    public int MaxStackSize;
+
 
     [Header("UI")]
     [TextArea(4, 4)]

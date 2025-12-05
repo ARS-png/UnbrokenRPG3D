@@ -24,20 +24,25 @@ public class InventorySystem
 
     public bool AddToInventory(InventoryItemSO itemToAdd, int amountToAdd)
     {
-        if (FoundPossibleSlots(itemToAdd,out List<InventorySlot> inventorySlot))
-        {
-            foreach (var slot in inventorySlot)
-            {
-                if (slot.RoomLeftInStack(amountToAdd))
-                {
-                    slot.AddToStack(amountToAdd);
-                    return true;
-                }
-            }
+        //if (FoundPossibleSlots(itemToAdd, out List<InventorySlot> inventorySlot))
+        //{
 
+        //    foreach (var slot in inventorySlot)
+        //    {
+        //        slot.AddToStack(amountToAdd);
+        //        return true;
+        //    }
+
+        //}
+
+        if (FindFirstSlotWithSameData(itemToAdd, out InventorySlot inventorySlot))
+        {
+            inventorySlot.AddToStack(amountToAdd);
+            return true;
         }
 
-        if (HasFreeSlot(out InventorySlot freeSlot)) //полносьтю изменить алгоритм
+
+        else if (HasFreeSlot(out InventorySlot freeSlot))
         {
             freeSlot.UpdateInventorySlot(itemToAdd, amountToAdd);
             return true;
@@ -46,18 +51,18 @@ public class InventorySystem
         return false;
     }
 
-    public bool FoundPossibleSlots(InventoryItemSO itemToAdd,out List<InventorySlot> possibleSlots)
+    public bool FindFirstSlotWithSameData(InventoryItemSO itemToAdd, out InventorySlot possibleSlot)
     {
-        possibleSlots = inventorySlots.Where(i => i.ItemSO == itemToAdd).ToList();
+        possibleSlot = inventorySlots.FirstOrDefault(i => i.ItemSO == itemToAdd);
 
-        return possibleSlots == null ? false : true;
+        return possibleSlot == null ? false : true;
 
     }
 
     public bool HasFreeSlot(out InventorySlot freeSlot)
     {
         freeSlot = InventorySlots.FirstOrDefault(i => i.ItemSO == null);
-        return freeSlot == null ? false : true; 
+        return freeSlot == null ? false : true;
     }
 
 }
