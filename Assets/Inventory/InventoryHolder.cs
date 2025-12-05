@@ -26,7 +26,7 @@ public class InventoryHolder : MonoBehaviour
 
     private void AddToInventoryWithDestroy(InventoryItemSO itemSO, int count, PickUpItem itemToDelete)
     {
-        if (InventorySystem.AddToInventory(itemSO, 1))
+        if (InventorySystem.AddToInventory(itemSO, count))
         {
             Destroy(itemToDelete.gameObject);
         }

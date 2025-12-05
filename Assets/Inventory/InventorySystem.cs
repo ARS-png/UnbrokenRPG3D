@@ -24,7 +24,7 @@ public class InventorySystem
 
     public bool AddToInventory(InventoryItemSO itemToAdd, int amountToAdd)
     {
-        if (ContainsItem(itemToAdd, out List<InventorySlot> inventorySlot))
+        if (FoundPossibleSlots(itemToAdd,out List<InventorySlot> inventorySlot))
         {
             foreach (var slot in inventorySlot)
             {
@@ -37,7 +37,7 @@ public class InventorySystem
 
         }
 
-        if (HasFreeSlot(out InventorySlot freeSlot))
+        if (HasFreeSlot(out InventorySlot freeSlot)) //полносьтю изменить алгоритм
         {
             freeSlot.UpdateInventorySlot(itemToAdd, amountToAdd);
             return true;
@@ -46,11 +46,11 @@ public class InventorySystem
         return false;
     }
 
-    public bool ContainsItem(InventoryItemSO itemToAdd, out List<InventorySlot> inventorySlot)
+    public bool FoundPossibleSlots(InventoryItemSO itemToAdd,out List<InventorySlot> possibleSlots)
     {
-        inventorySlot = inventorySlots.Where(i => i.ItemSO == itemToAdd).ToList();
+        possibleSlots = inventorySlots.Where(i => i.ItemSO == itemToAdd).ToList();
 
-        return inventorySlot == null ? false : true;
+        return possibleSlots == null ? false : true;
 
     }
 
