@@ -17,7 +17,7 @@ public class Inventory : MonoBehaviour //вроде как вообще не нужен
         AddItem("this");
         Debug.Log("Count of items in actual inventory is: " + actualItemMap.Count);
 
-        GameEventsManager.instance.inventoryEvents.ChangeInventory();//custom
+      
     }
 
     private Dictionary<string, Item> CreateItemMap()

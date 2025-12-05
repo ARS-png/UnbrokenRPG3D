@@ -5,6 +5,7 @@ public class PickUpItem : Interactable
 {
     [SerializeField] private InventoryItemSO itemSO;
 
+ 
     public override void Start()
     {
         base.Start();
@@ -16,20 +17,7 @@ public class PickUpItem : Interactable
         base.Interaction();
         print("I put " + interactableName + "in my inventory");
 
-        var inventoryHolder = this.transform.GetComponent<InventoryHolder>();
-
-        if (inventoryHolder == null)
-        {
-            Debug.LogError("");
-            return;
-        }
-        else
-        {
-            if (inventoryHolder.InventorySystem.AddToInventory(itemSO, 1))
-            {
-                Destroy(this.gameObject);
-            }
-        }
-          
+        
+        GameEventsManager.instance.inventoryEvents.AddItemToInventory(itemSO, 1, this);
     }
 }

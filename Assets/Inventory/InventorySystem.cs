@@ -1,5 +1,4 @@
 using Ink.Parsed;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -7,8 +6,6 @@ using UnityEngine;
 [System.Serializable]
 public class InventorySystem
 {
-    public event Action<InventorySlot> OnInventorySlotChanged;
-
     [SerializeField] private List<InventorySlot> inventorySlots;
 
     public int InventorySize() => inventorySlots.Count;
@@ -27,39 +24,40 @@ public class InventorySystem
 
     public bool AddToInventory(InventoryItemSO itemToAdd, int amountToAdd)
     {
-        if (ContainsItem(itemToAdd, out List<InventorySlot> invSlot)) //ckeck whataver item in inventory
+        if (ContainsItem(itemToAdd, out List<InventorySlot> inventorySlot))
         {
-            foreach (var slot in invSlot)
+            foreach (var slot in inventorySlot)
             {
                 if (slot.RoomLeftInStack(amountToAdd))
                 {
                     slot.AddToStack(amountToAdd);
-                    OnInventorySlotChanged?.Invoke(slot);
                     return true;
                 }
             }
+
         }
 
-        if (HasFreeSlot(out InventorySlot freeSlot)) // Gets the first available slot
+        if (HasFreeSlot(out InventorySlot freeSlot))
         {
             freeSlot.UpdateInventorySlot(itemToAdd, amountToAdd);
-            OnInventorySlotChanged?.Invoke(freeSlot);
             return true;
         }
 
         return false;
     }
 
-    public bool ContainsItem(InventoryItemSO itemToAdd, out List<InventorySlot> invSlot)
+    public bool ContainsItem(InventoryItemSO itemToAdd, out List<InventorySlot> inventorySlot)
     {
-        invSlot = InventorySlots.Where(i => i.ItemSO == itemToAdd).ToList();
-        Debug.Log(invSlot.Count);
-        return invSlot == null ? false : true;
+        inventorySlot = inventorySlots.Where(i => i.ItemSO == itemToAdd).ToList();
+
+        return inventorySlot == null ? false : true;
+
     }
 
     public bool HasFreeSlot(out InventorySlot freeSlot)
     {
         freeSlot = InventorySlots.FirstOrDefault(i => i.ItemSO == null);
-        return freeSlot == null ? false : true;
+        return freeSlot == null ? false : true; 
     }
+
 }

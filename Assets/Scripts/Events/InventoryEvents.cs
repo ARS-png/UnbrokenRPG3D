@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class InventoryEvents
 {
-    public event Action onChangeInventory;
-    public void ChangeInventory() => onChangeInventory?.Invoke(); 
+    public event Action<InventoryItemSO, int, PickUpItem> onItemAddedToInventory;
+
+    public void AddItemToInventory(InventoryItemSO itemSO, int count, PickUpItem itemToDelete) => onItemAddedToInventory?.Invoke(itemSO, count, itemToDelete);
 }

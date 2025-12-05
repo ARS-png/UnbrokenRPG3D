@@ -5,12 +5,30 @@ public class InventoryHolder : MonoBehaviour
 {
     [SerializeField] private int inventorySize;
 
-    [SerializeField] protected InventorySlotContainer slotContainer;
+    [SerializeField] protected InventorySystem inventorySystem;
 
-    public InventorySlotContainer InventorySystem=> slotContainer;
+    public InventorySystem InventorySystem => inventorySystem;
 
     private void Awake()
     {
-        slotContainer = new InventorySlotContainer(inventorySize);
+        inventorySystem = new InventorySystem(inventorySize);
+    }
+
+    private void OnEnable()
+    {
+        GameEventsManager.instance.inventoryEvents.onItemAddedToInventory += AddToInventoryWithDestroy;
+    }
+
+    private void OnDisable()
+    {
+        
+    }
+
+    private void AddToInventoryWithDestroy(InventoryItemSO itemSO, int count, PickUpItem itemToDelete)
+    {
+        if (InventorySystem.AddToInventory(itemSO, 1))
+        {
+            Destroy(itemToDelete.gameObject);
+        }
     }
 }
