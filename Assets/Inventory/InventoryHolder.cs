@@ -7,7 +7,7 @@ public class InventoryHolder : MonoBehaviour
 
     [SerializeField] protected InventorySlotContainer slotContainer;
 
-    public InventorySlotContainer SlotContainer=> slotContainer;
+    public InventorySlotContainer InventorySystem=> slotContainer;
 
     private void Awake()
     {

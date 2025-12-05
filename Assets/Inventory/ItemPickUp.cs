@@ -26,7 +26,7 @@ public class ItemPickUp : MonoBehaviour
         }
         else
         {
-            if (inventory.SlotContainer.AddToInventory(ItemSO, 1))
+            if (inventory.InventorySystem.AddToInventory(ItemSO, 1))
             {
                 Destroy(this.gameObject);
             }

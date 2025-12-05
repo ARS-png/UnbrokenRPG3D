@@ -61,6 +61,7 @@ public class InteractableNameText : MonoBehaviour
             transform.position = interactable.transform.position + Vector3.up * capsCollider.height;
             transform.LookAt(2 * transform.position - cameraTransform.position);
         }
+     
         else
         {
             print("Error, no collider found");

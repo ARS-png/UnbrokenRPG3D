@@ -7,6 +7,8 @@ public class Item
     public int amount;
     public string itemType;
     public string itemId;
+ 
+
 
     public Item(InventoryItemSO inventoryItemSO)
     {
