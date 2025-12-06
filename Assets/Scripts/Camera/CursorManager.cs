@@ -5,10 +5,15 @@ public class CursorManager : MonoBehaviour
     private void Start()
     {
 
-        if (PauseManager.Instance != null)
+        GameEventsManager.instance.inventoryEvents.onInventoryPanelShow += EnableCursor;
+
+        GameEventsManager.instance.inventoryEvents.onInventoryPanelHide += DisableCursor;
+
+
+        if (GameStopManager.Instance != null)
         {
-            PauseManager.Instance.OnGamePaused += EnableCursor;
-            PauseManager.Instance.OnGameResumed += DisableCursor;           
+            GameStopManager.Instance.OnGamePaused += EnableCursor;
+            GameStopManager.Instance.OnGameResumed += DisableCursor;
         }
         else
         {
@@ -37,10 +42,13 @@ public class CursorManager : MonoBehaviour
     private void OnDestroy()
     {
 
-        if (PauseManager.Instance != null)
+        if (GameStopManager.Instance != null)
         {
-            PauseManager.Instance.OnGamePaused -= EnableCursor;
-            PauseManager.Instance.OnGameResumed -= DisableCursor;
+            GameStopManager.Instance.OnGamePaused -= EnableCursor;
+            GameStopManager.Instance.OnGameResumed -= DisableCursor;
         }
+
+        GameEventsManager.instance.inventoryEvents.onInventoryPanelShow -= EnableCursor;
+        GameEventsManager.instance.inventoryEvents.onInventoryPanelHide -= DisableCursor;
     }
 }

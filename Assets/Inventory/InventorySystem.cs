@@ -24,17 +24,6 @@ public class InventorySystem
 
     public bool AddToInventory(InventoryItemSO itemToAdd, int amountToAdd)
     {
-        //if (FoundPossibleSlots(itemToAdd, out List<InventorySlot> inventorySlot))
-        //{
-
-        //    foreach (var slot in inventorySlot)
-        //    {
-        //        slot.AddToStack(amountToAdd);
-        //        return true;
-        //    }
-
-        //}
-
         if (FindFirstSlotWithSameData(itemToAdd, out InventorySlot inventorySlot))
         {
             inventorySlot.AddToStack(amountToAdd);
