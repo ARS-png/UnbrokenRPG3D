@@ -7,6 +7,8 @@ public class InventoryHolder : MonoBehaviour
 
     [SerializeField] protected InventorySystem inventorySystem;
 
+    [SerializeField] private InventoryUISystem inventoryUISystem;
+
     public InventorySystem InventorySystem => inventorySystem;
 
     private void Awake()
@@ -21,13 +23,17 @@ public class InventoryHolder : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        GameEventsManager.instance.inventoryEvents.onItemAddedToInventory -= AddToInventoryWithDestroy;
     }
 
     private void AddToInventoryWithDestroy(InventoryItemSO itemSO, int count, PickUpItem itemToDelete)
     {
         if (InventorySystem.AddToInventory(itemSO, count))
         {
+            var item = inventorySystem.GetSlotByData(itemSO);
+
+            inventoryUISystem.UpdateUIButtonItem(item);
+
             Destroy(itemToDelete.gameObject);
         }
     }

@@ -2,6 +2,7 @@ using Ink.Parsed;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class InventorySystem
@@ -12,6 +13,8 @@ public class InventorySystem
 
     public List<InventorySlot> InventorySlots => inventorySlots;
 
+
+   
     public InventorySystem(int size)
     {
         inventorySlots = new List<InventorySlot>(size);
@@ -20,6 +23,7 @@ public class InventorySystem
         {
             inventorySlots.Add(new InventorySlot());
         }
+
     }
 
     public bool AddToInventory(InventoryItemSO itemToAdd, int amountToAdd)
@@ -40,6 +44,7 @@ public class InventorySystem
         return false;
     }
 
+
     public bool FindFirstSlotWithSameData(InventoryItemSO itemToAdd, out InventorySlot possibleSlot)
     {
         possibleSlot = inventorySlots.FirstOrDefault(i => i.ItemSO == itemToAdd);
@@ -48,10 +53,18 @@ public class InventorySystem
 
     }
 
+
+
     public bool HasFreeSlot(out InventorySlot freeSlot)
     {
         freeSlot = InventorySlots.FirstOrDefault(i => i.ItemSO == null);
         return freeSlot == null ? false : true;
+    }
+
+
+    public InventorySlot GetSlotByData(InventoryItemSO itemSO)
+    { 
+        return inventorySlots.FirstOrDefault(i => i.ItemSO == itemSO);
     }
 
 }
