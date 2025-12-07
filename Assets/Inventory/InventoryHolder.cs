@@ -41,12 +41,15 @@ public class InventoryHolder : MonoBehaviour
         }
     }
 
-    private void GetPrefabFromInventory(string itemId)
+    protected virtual void GetPrefabFromInventory(string itemId) 
     {
-        if (inventorySystem.GetPrefabFromInventory(itemId) != null)
-        {
-            Instantiate(inventorySystem.GetPrefabFromInventory(itemId), this.transform.position, this.transform.rotation, null);
-            Debug.Log("Prefab instantiaited with id" + itemId);
-        }
+        Debug.Log("Prefab instantiaited with id" + itemId);
     }
+    //{
+    //    if (inventorySystem.GetPrefabFromInventory(itemId) != null)
+    //    {
+    //        Instantiate(inventorySystem.GetPrefabFromInventory(itemId), this.transform.position, this.transform.rotation, null);
+    //        Debug.Log("Prefab instantiaited with id" + itemId);
+    //    }
+    //}
 }

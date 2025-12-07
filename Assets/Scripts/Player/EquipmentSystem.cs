@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EquipmentSystem : MonoBehaviour
+public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработать
 {
     [SerializeField] GameObject weaponHolder;
     [SerializeField] GameObject weapon;
@@ -9,22 +9,29 @@ public class EquipmentSystem : MonoBehaviour
 
     GameObject currentWeapon;
 
+    private void OnEnable()
+    {
+        GameEventsManager.instance.inventoryEvents.onWeaponSwitch += SwitchWeapon;
+    }
+
+    private void OnDisable()
+    {
+        GameEventsManager.instance.inventoryEvents.onWeaponSwitch -= SwitchWeapon;
+    }
+
     private void Start()
     {
-
         currentWeapon = Instantiate(weapon, weaponSheath.transform);
     }
 
     public void DrawWeapon()
     {
-
         currentWeapon.transform.SetParent(weaponHolder.transform);
         ResetWeaponTransform(currentWeapon);
     }
 
     public void SheathWeapon()
     {
-
         currentWeapon.transform.SetParent (weaponSheath.transform);
         ResetWeaponTransform (currentWeapon);
 
@@ -34,7 +41,7 @@ public class EquipmentSystem : MonoBehaviour
     {
         currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();
     }
-    //добавить класс enemy health
+ 
     public void EndDealDamage()
     {
         currentWeapon.GetComponentInChildren<DamageDealer>().EndDealDamage();
@@ -46,6 +53,16 @@ public class EquipmentSystem : MonoBehaviour
         currentWeapon.transform.localRotation = Quaternion.identity;
         currentWeapon.transform.localScale = Vector3.one;
     }
+
+    public void SwitchWeapon(GameObject newWeapon)
+    {
+        Destroy(currentWeapon);
+        currentWeapon = Instantiate(newWeapon, weaponSheath.transform);
+    }
+
+
+
+
 
 
 }

@@ -1,5 +1,6 @@
 using Ink.Parsed;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -72,6 +73,14 @@ public class InventorySystem
     public GameObject GetPrefabFromInventory(string itemId)
     {
         var inventorySlot = InventorySlots.FirstOrDefault(i => i.ItemSO.itemId == itemId);
+
         return inventorySlot.ItemSO.itemPrefab;
+    }
+
+    public InventoryItemSO.ItemType GetItemType(string itemId)
+    {
+        var inventorySlot = InventorySlots.FirstOrDefault(i => i.ItemSO.itemId == itemId);
+        InventoryItemSO.ItemType itemType = inventorySlot.ItemSO.itemType;
+        return itemType;
     }
 }
