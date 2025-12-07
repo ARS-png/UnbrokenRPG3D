@@ -19,11 +19,14 @@ public class InventoryHolder : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.instance.inventoryEvents.onItemAddedToInventory += AddToInventoryWithDestroy;
+        GameEventsManager.instance.inventoryEvents.onGetPrefabFromInventory += GetPrefabFromInventory;
+
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.inventoryEvents.onItemAddedToInventory -= AddToInventoryWithDestroy;
+        GameEventsManager.instance.inventoryEvents.onGetPrefabFromInventory -= GetPrefabFromInventory;
     }
 
     private void AddToInventoryWithDestroy(InventoryItemSO itemSO, int count, PickUpItem itemToDelete)
@@ -35,6 +38,15 @@ public class InventoryHolder : MonoBehaviour
             inventoryUISystem.UpdateUIButtonItem(item);
 
             Destroy(itemToDelete.gameObject);
+        }
+    }
+
+    private void GetPrefabFromInventory(string itemId)
+    {
+        if (inventorySystem.GetPrefabFromInventory(itemId) != null)
+        {
+            Instantiate(inventorySystem.GetPrefabFromInventory(itemId), this.transform.position, this.transform.rotation, null);
+            Debug.Log("Prefab instantiaited with id" + itemId);
         }
     }
 }

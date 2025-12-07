@@ -62,6 +62,7 @@ public class GameStopUI : MonoBehaviour
         if (GameStopManager.Instance != null)
         {
             GameStopManager.Instance.OnGamePaused -= EnableBackgroundPause;
+            GameStopManager.Instance.OnGameResumed -= DisableBackgroundPause;
         }
 
         GameEventsManager.instance.inventoryEvents.onInventoryPanelShow -= ShowInventoryPanel;

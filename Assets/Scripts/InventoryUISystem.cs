@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,11 +23,17 @@ public class InventoryUISystem : MonoBehaviour
         if (FindFirstButton(invSLot, out InventorySlotUI slotUI))
         {
             slotUI.SetItem(invSLot.ItemSO.itemId, invSLot.ItemSO.Icon, invSLot.Amount);
+
+            slotUI.button.onClick.RemoveAllListeners();
+            slotUI.button.onClick.AddListener(() => GetPrefabFromInventory(slotUI));
         }
 
         else if (HasFreeButton(out InventorySlotUI freeSlotUI))
         {
             freeSlotUI.SetItem(invSLot.ItemSO.itemId, invSLot.ItemSO.Icon, invSLot.Amount);
+
+            freeSlotUI.button.onClick.RemoveAllListeners();
+            freeSlotUI.button.onClick.AddListener(() => GetPrefabFromInventory(freeSlotUI));
         }
     }
 
@@ -42,6 +49,14 @@ public class InventoryUISystem : MonoBehaviour
         freeSlotUIButton = itemUIButtonsList.FirstOrDefault(i => i.CurrentItemId == "");
         return freeSlotUIButton != null;
     }
+
+
+    private void GetPrefabFromInventory(InventorySlotUI slotUI)
+    {
+        GameEventsManager.instance.inventoryEvents.GetPrefabFromInventory(slotUI.CurrentItemId);
+    }
+
+
 
 
 }

@@ -9,12 +9,6 @@ public class InventorySlot
     public InventoryItemSO ItemSO => itemSO;
     public int Amount => amount;
 
-    public InventorySlot(InventoryItemSO itemSO, int amount)
-    {
-        this.itemSO = itemSO;
-        this.amount = amount;
-    }
-
     public InventorySlot()
     {
         ClearSlot();

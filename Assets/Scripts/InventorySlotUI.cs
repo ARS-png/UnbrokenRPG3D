@@ -10,8 +10,8 @@ public class InventorySlotUI : MonoBehaviour //button wrapper
     private void Awake()
     {
         button = GetComponent<Button>();
+      
     }
-
 
     public void SetItem(string itemId, Sprite icon, int amount)
     {
@@ -19,5 +19,6 @@ public class InventorySlotUI : MonoBehaviour //button wrapper
         button.image.sprite  = icon;
         button.GetComponentInChildren<TextMeshProUGUI>().text = amount.ToString();
     }
+
 
 }

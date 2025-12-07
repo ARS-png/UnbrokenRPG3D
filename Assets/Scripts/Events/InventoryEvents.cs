@@ -7,9 +7,13 @@ public class InventoryEvents
 
     public event Action onInventoryPanelHide;
     public event Action onInventoryPanelShow;
+    public event Action<string> onGetPrefabFromInventory;
 
-    public void AddItemToInventory(InventoryItemSO itemSO, int count, PickUpItem itemToDelete) => onItemAddedToInventory?.Invoke(itemSO, count, itemToDelete);
+    public void AddItemToInventory(InventoryItemSO itemSO, int count, PickUpItem itemToDelete) =>
+        onItemAddedToInventory?.Invoke(itemSO, count, itemToDelete);
 
     public void CloseInventoryPanel() => onInventoryPanelHide?.Invoke();   
-    public void ShowInventoryPanel() => onInventoryPanelShow?.Invoke(); 
+    public void ShowInventoryPanel() => onInventoryPanelShow?.Invoke();
+
+    public void GetPrefabFromInventory(string itemId) => onGetPrefabFromInventory.Invoke(itemId);
 }

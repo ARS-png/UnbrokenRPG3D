@@ -1,6 +1,7 @@
 using Ink.Parsed;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,8 +14,6 @@ public class InventorySystem
 
     public List<InventorySlot> InventorySlots => inventorySlots;
 
-
-   
     public InventorySystem(int size)
     {
         inventorySlots = new List<InventorySlot>(size);
@@ -25,6 +24,9 @@ public class InventorySystem
         }
 
     }
+
+
+   
 
     public bool AddToInventory(InventoryItemSO itemToAdd, int amountToAdd)
     {
@@ -54,7 +56,6 @@ public class InventorySystem
     }
 
 
-
     public bool HasFreeSlot(out InventorySlot freeSlot)
     {
         freeSlot = InventorySlots.FirstOrDefault(i => i.ItemSO == null);
@@ -63,8 +64,14 @@ public class InventorySystem
 
 
     public InventorySlot GetSlotByData(InventoryItemSO itemSO)
-    { 
+    {
         return inventorySlots.FirstOrDefault(i => i.ItemSO == itemSO);
     }
 
+
+    public GameObject GetPrefabFromInventory(string itemId)
+    {
+        var inventorySlot = InventorySlots.FirstOrDefault(i => i.ItemSO.itemId == itemId);
+        return inventorySlot.ItemSO.itemPrefab;
+    }
 }
