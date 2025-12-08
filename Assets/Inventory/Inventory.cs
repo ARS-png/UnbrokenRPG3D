@@ -15,7 +15,7 @@ public class Inventory : MonoBehaviour //вроде как вообще не нужен
         actualItemMap = new Dictionary<string, Item>();
 
         AddItem("this");
-        Debug.Log("Count of items in actual inventory is: " + actualItemMap.Count);
+        //Debug.Log("Count of items in actual inventory is: " + actualItemMap.Count);
 
       
     }

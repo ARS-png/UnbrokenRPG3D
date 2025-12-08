@@ -15,7 +15,7 @@ public class PickUpItem : Interactable
     protected override void Interaction()
     {
         base.Interaction();
-        print("I put " + interactableName + "in my inventory");
+        //print("I put " + interactableName + "in my inventory");
 
         
         GameEventsManager.instance.inventoryEvents.AddItemToInventory(itemSO, 1, this);

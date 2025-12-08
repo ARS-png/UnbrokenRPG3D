@@ -20,5 +20,13 @@ public class InventorySlotUI : MonoBehaviour //button wrapper
         button.GetComponentInChildren<TextMeshProUGUI>().text = amount.ToString();
     }
 
+    public void ResetSlot()
+    {
+        CurrentItemId = "";
+        button.GetComponentInChildren<TextMeshProUGUI>().text = "";
+        button.image.sprite = null;
+        button.onClick.RemoveAllListeners();
+    }
+
 
 }

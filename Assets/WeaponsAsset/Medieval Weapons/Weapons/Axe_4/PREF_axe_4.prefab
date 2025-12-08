@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1481742744449094163}
@@ -172,7 +172,7 @@ MonoBehaviour:
   interactableName: Axe
   interactionDistance: 2
   isInteractable: 1
-  itemName: Axe
+  itemSO: {fileID: 11400000, guid: fceb086361a674c4b808c04d9d98bb65, type: 2}
 --- !u!65 &6325008439729247165
 BoxCollider:
   m_ObjectHideFlags: 0

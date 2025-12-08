@@ -39,11 +39,24 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
 
     public void StartDealDamage()
     {
+        if (currentWeapon.GetComponentsInChildren<DamageDealer>() == null)
+        {
+            Debug.LogError("There is no damage dealer component");
+            return;
+        }
+
         currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();
     }
  
+
     public void EndDealDamage()
     {
+        if (currentWeapon.GetComponentsInChildren<DamageDealer>() == null)
+        {
+            Debug.LogError("There is no damage dealer component");
+            return;
+        }
+
         currentWeapon.GetComponentInChildren<DamageDealer>().EndDealDamage();
     }
 
@@ -51,7 +64,6 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
     {
         currentWeapon.transform.localPosition = Vector3.zero;
         currentWeapon.transform.localRotation = Quaternion.identity;
-        currentWeapon.transform.localScale = Vector3.one;
     }
 
     public void SwitchWeapon(GameObject newWeapon)

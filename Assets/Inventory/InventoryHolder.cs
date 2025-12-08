@@ -19,19 +19,19 @@ public class InventoryHolder : MonoBehaviour
     private void OnEnable()
     {
         GameEventsManager.instance.inventoryEvents.onItemAddedToInventory += AddToInventoryWithDestroy;
-        GameEventsManager.instance.inventoryEvents.onGetPrefabFromInventory += GetPrefabFromInventory;
+        GameEventsManager.instance.inventoryEvents.onRemoveFromInventory += RemoveFromInventory;
 
     }
 
     private void OnDisable()
     {
         GameEventsManager.instance.inventoryEvents.onItemAddedToInventory -= AddToInventoryWithDestroy;
-        GameEventsManager.instance.inventoryEvents.onGetPrefabFromInventory -= GetPrefabFromInventory;
+        GameEventsManager.instance.inventoryEvents.onRemoveFromInventory -= RemoveFromInventory;
     }
 
-    private void AddToInventoryWithDestroy(InventoryItemSO itemSO, int count, PickUpItem itemToDelete)
+    private void AddToInventoryWithDestroy(InventoryItemSO itemSO, int amount, PickUpItem itemToDelete)
     {
-        if (InventorySystem.AddToInventory(itemSO, count))
+        if (InventorySystem.AddToInventory(itemSO, amount))
         {
             var item = inventorySystem.GetSlotByData(itemSO);
 
@@ -41,15 +41,21 @@ public class InventoryHolder : MonoBehaviour
         }
     }
 
-    protected virtual void GetPrefabFromInventory(string itemId) 
+    protected virtual void RemoveFromInventory(string itemId, int amountToDelete)
     {
-        Debug.Log("Prefab instantiaited with id" + itemId);
+        InventorySlot item = inventorySystem.GetSlotByItemId(itemId);
+
+        if (item == null)
+        {
+            Debug.LogError("Iventory Item is null");
+            return; 
+        }
+
+        if (InventorySystem.RemoveFromInventory(item.ItemSO, amountToDelete)) //ItemID после удаления становится null
+        {
+            Debug.Log("Item is removed form iventory ewith ID: ");
+            inventoryUISystem.UpdateUIButtonItem(item);
+            
+        }
     }
-    //{
-    //    if (inventorySystem.GetPrefabFromInventory(itemId) != null)
-    //    {
-    //        Instantiate(inventorySystem.GetPrefabFromInventory(itemId), this.transform.position, this.transform.rotation, null);
-    //        Debug.Log("Prefab instantiaited with id" + itemId);
-    //    }
-    //}
 }

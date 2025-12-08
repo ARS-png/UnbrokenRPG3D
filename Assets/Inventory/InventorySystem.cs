@@ -15,6 +15,7 @@ public class InventorySystem
 
     public List<InventorySlot> InventorySlots => inventorySlots;
 
+
     public InventorySystem(int size)
     {
         inventorySlots = new List<InventorySlot>(size);
@@ -27,10 +28,14 @@ public class InventorySystem
     }
 
 
-   
-
     public bool AddToInventory(InventoryItemSO itemToAdd, int amountToAdd)
     {
+        if (itemToAdd == null)
+        {
+            Debug.LogError($"There is no scriptable object on item");
+            return false;
+        }
+
         if (FindFirstSlotWithSameData(itemToAdd, out InventorySlot inventorySlot))
         {
             inventorySlot.AddToStack(amountToAdd);
@@ -48,9 +53,28 @@ public class InventorySystem
     }
 
 
-    public bool FindFirstSlotWithSameData(InventoryItemSO itemToAdd, out InventorySlot possibleSlot)
+    public bool RemoveFromInventory(InventoryItemSO itemData, int amountToRemove)
     {
-        possibleSlot = inventorySlots.FirstOrDefault(i => i.ItemSO == itemToAdd);
+        if (FindFirstSlotWithSameData(itemData, out InventorySlot inventorySlot))
+        {
+            inventorySlot.RemoveFromStack(amountToRemove); //так же принудительно нужно кактто сохранить 
+            //целостность item, потому что префаб оружия не получает события
+
+            if (inventorySlot.Amount == 0)
+            {
+                GameEventsManager.instance.inventoryEvents.RemoveUISlotAndSubscribers(inventorySlot);//clear ui before deleted actualy value
+
+                inventorySlot.ClearSlot();
+            }
+            return true;
+        }
+        return false;
+    }
+
+
+    public bool FindFirstSlotWithSameData(InventoryItemSO itemData, out InventorySlot possibleSlot)
+    {
+        possibleSlot = inventorySlots.FirstOrDefault(i => i.ItemSO == itemData);
 
         return possibleSlot == null ? false : true;
 
@@ -70,12 +94,20 @@ public class InventorySystem
     }
 
 
+    public InventorySlot GetSlotByItemId(string itemId)
+    {
+        return inventorySlots.FirstOrDefault(i => i.ItemSO != null && i.ItemSO.itemId == itemId);
+    }
+
+
     public GameObject GetPrefabFromInventory(string itemId)
     {
-        var inventorySlot = InventorySlots.FirstOrDefault(i => i.ItemSO.itemId == itemId);
 
-        return inventorySlot.ItemSO.itemPrefab;
+        var inventorySlot = InventorySlots.FirstOrDefault(i => i.ItemSO != null && i.ItemSO.itemId == itemId);
+
+        return inventorySlot?.ItemSO?.itemPrefab;
     }
+
 
     public InventoryItemSO.ItemType GetItemType(string itemId)
     {
@@ -83,4 +115,6 @@ public class InventorySystem
         InventoryItemSO.ItemType itemType = inventorySlot.ItemSO.itemType;
         return itemType;
     }
+
+
 }

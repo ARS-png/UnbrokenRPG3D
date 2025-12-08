@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class PlayerInventoryHolder : InventoryHolder
 {
-    protected override void GetPrefabFromInventory(string itemId)
+    protected override void RemoveFromInventory(string itemId, int amountToRemove)
     {
-        base.GetPrefabFromInventory(itemId);
-
         if (inventorySystem.GetPrefabFromInventory(itemId) == null) { return; }
+        var itemType = inventorySystem.GetItemType(itemId);
 
-
-        if (inventorySystem.GetItemType(itemId) == InventoryItemSO.ItemType.WEAPON)
+        switch (itemType)
         {
-            GameObject weapon = inventorySystem.GetPrefabFromInventory(itemId);
-            GameEventsManager.instance.inventoryEvents.SwitchWeapon(weapon);
+            case (InventoryItemSO.ItemType.WEAPON):
+                GameObject weapon = inventorySystem.GetPrefabFromInventory(itemId);
+                GameEventsManager.instance.inventoryEvents.SwitchWeapon(weapon);
+                break;
+
+            default: break;
         }
+
+        base.RemoveFromInventory(itemId, amountToRemove);     
+
     }
 }

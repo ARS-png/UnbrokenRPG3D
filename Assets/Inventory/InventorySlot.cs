@@ -14,7 +14,7 @@ public class InventorySlot
         ClearSlot();
     }
 
-    public void ClearSlot()
+    public void ClearSlot() //почему картинка остается?
     {
         itemSO = null;
         amount = -1;
@@ -25,9 +25,9 @@ public class InventorySlot
         this.amount += amount;
     }
 
-    public void RemoveFromStack(int amount)
+    public void RemoveFromStack(int _amount)
     {
-        this.amount -= amount;
+        this.amount -= _amount;
     }
 
     public void UpdateInventorySlot(InventoryItemSO data, int amount)
