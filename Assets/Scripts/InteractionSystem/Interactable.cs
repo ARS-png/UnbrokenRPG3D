@@ -36,20 +36,26 @@ public class Interactable : MonoBehaviour
 
     }
 
-
+    public void SetIsInteractableValue(bool value)
+    {
+        isInteractable = value;
+    }
 
     public void TargetOn()
     {
+        if (!isInteractable) { return; }
+
         if (interactableNameText != null)
         {
             interactableNameText.ShowText(this);
             interactableNameText.SetInteractableNamePosition(this);
         }
-      
+
     }
 
     public void TargetOff()
     {
+        if (!isInteractable) { return; }
         if (interactableNameText != null)
         {
             interactableNameText.HideText();

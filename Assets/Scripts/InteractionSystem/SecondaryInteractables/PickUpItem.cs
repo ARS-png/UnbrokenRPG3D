@@ -6,13 +6,15 @@ public class PickUpItem : Interactable
 {
     [SerializeField] private InventoryItemSO itemSO;
 
-    public InventoryItemSO GetItemSO() => itemSO;//я дурак
+    public InventoryItemSO GetItemSO() => itemSO;
+
+   
  
     public override void Start()
     {
         base.Start();
+        
     }
-
 
     protected override void Interaction()
     {

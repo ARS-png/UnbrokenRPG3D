@@ -23,6 +23,7 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
     private void Start()
     {
         currentWeapon = Instantiate(weapon, weaponSheath.transform);
+        currentWeapon.GetComponent<PickUpItem>().SetIsInteractableValue(false);
     }
 
     public void DrawWeapon()
@@ -74,6 +75,7 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
             Destroy(currentWeapon);
 
             currentWeapon = Instantiate(newWeapon, weaponSheath.transform);
+            currentWeapon.GetComponent<PickUpItem>().SetIsInteractableValue(false);
         }
 
         else
@@ -81,9 +83,11 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
             InventoryItemSO currentWeaponInfo = currentWeapon.GetComponent<PickUpItem>().GetItemSO();
             PickUpItem currentWeaponPickUp = currentWeapon.GetComponent<PickUpItem>();
 
+
             GameEventsManager.instance.inventoryEvents.AddItemToInventory(currentWeaponInfo, 1, currentWeaponPickUp);
 
             currentWeapon = Instantiate(newWeapon, weaponSheath.transform);
+            currentWeapon.GetComponent<PickUpItem>().SetIsInteractableValue(false);
         }
     }
 
