@@ -86,7 +86,7 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
-        movementSM.currentState.PhisicsUpdate();
+        movementSM.currentState.PhysicsUpdate();
     }
 
 }

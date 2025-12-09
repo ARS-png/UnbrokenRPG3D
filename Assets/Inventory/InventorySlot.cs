@@ -14,7 +14,7 @@ public class InventorySlot
         ClearSlot();
     }
 
-    public void ClearSlot() //почему картинка остается?
+    public void ClearSlot() 
     {
         itemSO = null;
         amount = -1;

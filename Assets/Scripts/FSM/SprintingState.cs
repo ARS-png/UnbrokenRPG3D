@@ -47,22 +47,14 @@ public class SprintingState : State
         velocity = velocity.x * character.cameraTransform.right.normalized + velocity.z * character.cameraTransform.forward.normalized;
         velocity.y = 0;
 
-        if (sprintAction.triggered || input.sqrMagnitude == 0f) // tuta
-        {
-            sprint = false;
-        }//добавить какоето условие выхода
-        else
-        {
-            sprint = true;
-        }
-        if (jumpAction.triggered)
-        {
-            sprintJump = true;
-            //stateMachine.ChangeState(character.jumping);
-        }
+        if (sprintAction.triggered || input.sqrMagnitude == 0f) { sprint = false; }
+    
+        else { sprint = true; }
+   
+        if (jumpAction.triggered) { sprintJump = true; }
     }
 
-    public override void LogicUpdate()//or here
+    public override void LogicUpdate()
     {
         base.LogicUpdate();
         if (sprint)
@@ -72,7 +64,8 @@ public class SprintingState : State
         else
         {
             character.animator.SetBool("isRunning", false);
-            //добавить условие про combat layer
+         
+
             if (character.animator.GetBool("isCombat"))
             {
                 stateMachine.ChangeState(character.combatting);
@@ -80,9 +73,10 @@ public class SprintingState : State
             else 
             {
                 stateMachine.ChangeState(character.standing);
-            }
-                
+            }          
         }
+
+
         if (sprintJump)
         {
             character.animator.SetBool("isRunning", false);
@@ -92,9 +86,9 @@ public class SprintingState : State
 
     }
 
-    public override void PhisicsUpdate()
+    public override void PhysicsUpdate()
     {
-        base.PhisicsUpdate();
+        base.PhysicsUpdate();
         gravityVelocity.y += gravityValue * Time.deltaTime;
         grounded = character.controller.isGrounded;
         if (grounded && gravityVelocity.y < 0)

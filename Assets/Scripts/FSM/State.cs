@@ -47,7 +47,7 @@ public class State
     {
     }
 
-    public virtual void PhisicsUpdate()
+    public virtual void PhysicsUpdate()
     { 
     }
 

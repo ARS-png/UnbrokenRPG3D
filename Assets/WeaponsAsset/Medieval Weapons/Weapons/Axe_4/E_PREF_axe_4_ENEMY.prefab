@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 5606417230009755776}
   - component: {fileID: 6325008439729247165}
   m_Layer: 17
-  m_Name: PREF_axe_4
+  m_Name: E_PREF_axe_4_ENEMY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1481742744449094163}
@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactableName: Axe
-  interactionDistance: 2
+  interactionDistance: 4
   isInteractable: 1
   itemSO: {fileID: 11400000, guid: fceb086361a674c4b808c04d9d98bb65, type: 2}
 --- !u!65 &6325008439729247165

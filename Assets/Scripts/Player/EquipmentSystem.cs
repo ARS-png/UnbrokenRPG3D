@@ -34,8 +34,8 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
 
     public void SheathWeapon()
     {
-        currentWeapon.transform.SetParent (weaponSheath.transform);
-        ResetWeaponTransform (currentWeapon);
+        currentWeapon.transform.SetParent(weaponSheath.transform);
+        ResetWeaponTransform(currentWeapon);
 
     }
 
@@ -49,7 +49,7 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
 
         currentWeapon.GetComponentInChildren<DamageDealer>().StartDealDamage();
     }
- 
+
 
     public void EndDealDamage()
     {
@@ -83,6 +83,10 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
             InventoryItemSO currentWeaponInfo = currentWeapon.GetComponent<PickUpItem>().GetItemSO();
             PickUpItem currentWeaponPickUp = currentWeapon.GetComponent<PickUpItem>();
 
+            InventoryItemSO newWeaponInfo = newWeapon.GetComponent<PickUpItem>().GetItemSO();
+
+
+            ChangeHoldersData(weaponSheath, weaponHolder, newWeaponInfo);
 
             GameEventsManager.instance.inventoryEvents.AddItemToInventory(currentWeaponInfo, 1, currentWeaponPickUp);
 
@@ -97,4 +101,14 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
     }
 
 
+    private void ChangeHoldersData(GameObject weaponSheath, GameObject weaponHolder, InventoryItemSO itemSO)
+    {
+        InventoryWeaponItemSO weaponItemSO = itemSO.WeaponItemSO;
+
+        weaponHolder.transform.localPosition = weaponItemSO.weaponHolderPosition;
+        weaponHolder.transform.localRotation = Quaternion.Euler(weaponItemSO.weaponHolderRotation);
+
+        weaponSheath.transform.localPosition = weaponItemSO.weaponSheathPosition;
+        weaponSheath.transform.localRotation = Quaternion.Euler(weaponItemSO.weaponSheathRotation);
+    }
 }

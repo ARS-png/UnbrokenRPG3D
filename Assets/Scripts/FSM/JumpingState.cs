@@ -53,9 +53,9 @@ public class JumpingState : State
 
     }
 
-    public override void PhisicsUpdate()
+    public override void PhysicsUpdate()
     {
-        base.PhisicsUpdate();
+        base.PhysicsUpdate();
         
     }
 

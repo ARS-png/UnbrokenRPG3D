@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BasicItemSO", menuName = "Inventory/New ItemSO", order = 1)]
+[CreateAssetMenu(fileName = "BasicItemSO", menuName = "Inventory/New ItemSO", order = 2)]
 public class InventoryItemSO : ScriptableObject
 {
     public enum ItemType
@@ -9,14 +9,17 @@ public class InventoryItemSO : ScriptableObject
         WEAPON
     }
 
+    [Header("If The Weapon")]
+    public InventoryWeaponItemSO WeaponItemSO;
+    
 
     [Header("General")]
     public int amount;
-    //public string itemType;
     public string itemId;
     public ItemType itemType;
-   
 
+   
+    
     [Header("UI")]
     [TextArea(4, 4)]
     public string description;
