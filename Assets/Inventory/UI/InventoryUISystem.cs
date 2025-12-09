@@ -38,14 +38,7 @@ public class InventoryUISystem : MonoBehaviour
     }
     public void UpdateUIButtonItem(InventorySlot invSLot)
     {
-        Debug.Log("UI is updated");
-        if (invSLot.ItemSO == null)//
-        {
-
-            Debug.Log("inventory slot ins null");
-            
-            return;
-        }
+        if (invSLot.ItemSO == null) { return; }
 
         if (FindFirstButton(invSLot, out InventorySlotUI slotUI))
         {

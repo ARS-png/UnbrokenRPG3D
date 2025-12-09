@@ -17,7 +17,9 @@ public class PlayerInventoryHolder : InventoryHolder
             default: break;
         }
 
-        base.RemoveFromInventory(itemId, amountToRemove);     
+
+        base.RemoveFromInventory(itemId, amountToRemove);
+
 
     }
 }

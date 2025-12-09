@@ -48,14 +48,14 @@ public class InventoryHolder : MonoBehaviour
         if (item == null)
         {
             Debug.LogError("Iventory Item is null");
-            return; 
+            return;
         }
 
-        if (InventorySystem.RemoveFromInventory(item.ItemSO, amountToDelete)) //ItemID после удаления становится null
+        if (InventorySystem.RemoveFromInventory(item.ItemSO, amountToDelete))
         {
             Debug.Log("Item is removed form iventory ewith ID: ");
+
             inventoryUISystem.UpdateUIButtonItem(item);
-            
         }
     }
 }

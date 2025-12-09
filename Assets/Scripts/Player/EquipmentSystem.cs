@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработать
@@ -68,13 +69,28 @@ public class EquipmentSystem : MonoBehaviour //над этим тже надо будет поработат
 
     public void SwitchWeapon(GameObject newWeapon)
     {
-        Destroy(currentWeapon);
-        currentWeapon = Instantiate(newWeapon, weaponSheath.transform);
+        if (IsCharacterWeaponIsNull())
+        {
+            Destroy(currentWeapon);
+
+            currentWeapon = Instantiate(newWeapon, weaponSheath.transform);
+        }
+
+        else
+        {
+            InventoryItemSO currentWeaponInfo = currentWeapon.GetComponent<PickUpItem>().GetItemSO();
+            PickUpItem currentWeaponPickUp = currentWeapon.GetComponent<PickUpItem>();
+
+            GameEventsManager.instance.inventoryEvents.AddItemToInventory(currentWeaponInfo, 1, currentWeaponPickUp);
+
+            currentWeapon = Instantiate(newWeapon, weaponSheath.transform);
+        }
     }
 
-
-
-
+    private bool IsCharacterWeaponIsNull()
+    {
+        return currentWeapon == null;
+    }
 
 
 }

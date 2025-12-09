@@ -1,10 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PickUpItem : Interactable
 {
     [SerializeField] private InventoryItemSO itemSO;
 
+    public InventoryItemSO GetItemSO() => itemSO;//я дурак
  
     public override void Start()
     {
