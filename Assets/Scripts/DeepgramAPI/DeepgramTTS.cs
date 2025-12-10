@@ -38,9 +38,9 @@ public class DeepgramTTS : MonoBehaviour
 
     void Start()
     {
-        Log("=== DEEPGRAM TTS STARTED ===");
+        //Log("=== DEEPGRAM TTS STARTED ===");
         SetupAudioSource();
-        Log($"Using model: {model}");
+        //Log($"Using model: {model}");
     }
 
     private void SetupAudioSource()

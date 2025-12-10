@@ -20,13 +20,13 @@ public class AttackState : State
     {
         base.Enter();
 
+        Debug.Log("Attack state is startted");
+
         attack = false;
         character.animator.applyRootMotion = true;
         timePassed = 0f;
         character.animator.SetTrigger("attack");
-        character.animator.SetFloat("moveAmount", 0f);
-
-     
+        character.animator.SetFloat("moveAmount", 0f);   
     }
 
     public override void HandleInput()
@@ -37,8 +37,6 @@ public class AttackState : State
         { 
             attack = true;
         }
-
-
     }
 
     public override void LogicUpdate()
@@ -52,23 +50,20 @@ public class AttackState : State
         if (timePassed >= clipLength / clipSpeed && attack) 
         {
             stateMachine.ChangeState(character.attacking);
-            character.animator.SetTrigger("attack");
-         
+            character.animator.SetTrigger("attack");   
         }
 
         if (timePassed >= clipLength / clipSpeed) 
         {
             stateMachine.ChangeState(character.combatting);
-        }
-
-       
+        }    
     }
 
-    public override void Exit()
+    public override void Exit() //выходит до завершения анимации"
     {
         base.Exit();
+        Debug.Log("Attack state is exited");
         character.animator.applyRootMotion = false;
-
     }
 
 }

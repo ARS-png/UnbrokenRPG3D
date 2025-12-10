@@ -113,9 +113,9 @@ public class StandingState : State
 
     }
 
-    public override void PhisicsUpdate()
+    public override void PhysicsUpdate()
     {
-        base.PhisicsUpdate();
+        base.PhysicsUpdate();
 
         gravityVelocity.y += gravityValue * Time.deltaTime;
         grounded = character.controller.isGrounded;

@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal;
 
-[RequireComponent(typeof(PauseManager))]
-public class PauseManager : MonoBehaviour
+[RequireComponent(typeof(GameStopManager))]
+public class GameStopManager : MonoBehaviour
 {
 
     [Header("PlayerInput")]
@@ -16,20 +16,24 @@ public class PauseManager : MonoBehaviour
     [SerializeField] AudioClip clip;
 
     private InputAction pauseAction;
+    private InputAction inventoryShowCloseAction;
+
     private Animator[] animators;
 
     public event System.Action OnGamePaused;
     public event System.Action OnGameResumed;
 
-    public static PauseManager Instance;
+    public static GameStopManager Instance;
 
     private bool isGameActive = true;
+    private bool isGamePaused = false;
+    private bool isInventoryOpen = false;
 
     private void Awake()
     {
         if (Instance == null)
         {
-            Instance = this;        
+            Instance = this;
         }
         else
         {
@@ -38,15 +42,24 @@ public class PauseManager : MonoBehaviour
     }
 
     private void Start()
-    {       
+    {
 
         animators = FindObjectsByType<Animator>(FindObjectsSortMode.None);
 
         if (playerInput != null)
         {
             pauseAction = playerInput.actions.FindAction("Pause");
+            inventoryShowCloseAction = playerInput.actions.FindAction("Inventory");
+
+            if (inventoryShowCloseAction == null)
+            {
+                Debug.LogError("Noetskjsdhf");
+            }
+
             pauseAction.performed += OnPauseClick;
+            inventoryShowCloseAction.performed += OnInventoryShowCloseClick;
             pauseAction.Enable();
+            inventoryShowCloseAction.Enable();
         }
 
         Debug.Log("PauseManager setup complete");
@@ -60,28 +73,58 @@ public class PauseManager : MonoBehaviour
 
     private void OnPauseClick(InputAction.CallbackContext context)
     {
-    
-        if (!isGameActive) return;
+        if (isInventoryOpen)
+        {
+            ResumeGame();
+            isGamePaused = false;
+            isInventoryOpen = false;
+        }
+
+        if (!isGameActive || isInventoryOpen) return;
 
         OnGamePaused?.Invoke();
 
         if (Time.timeScale > 0)
         {
             StopGame();
+            isGamePaused = true;
         }
         else
         {
             ResumeGame();
+            isGamePaused = false;
+        }
+    }
+
+    private void OnInventoryShowCloseClick(InputAction.CallbackContext context)
+    {
+        if (Time.timeScale > 0)
+        {
+            isGamePaused = false;
+        }
+
+        if (!isGameActive || isGamePaused) return;
+
+        GameEventsManager.instance.inventoryEvents.ShowInventoryPanel();
+
+        if (Time.timeScale > 0)
+        {
+            StopGame();
+            isInventoryOpen = true;
+        }
+        else
+        {
+            ResumeGame();
+            isInventoryOpen = false;
         }
     }
 
     public void StopGame()
     {
-      
+
         if (!isGameActive) return;
 
         Time.timeScale = 0;
-        //Debug.Log("Game Paused");
 
         if (playerInput != null)
         {
@@ -110,6 +153,9 @@ public class PauseManager : MonoBehaviour
         if (!isGameActive) return;
 
         OnGameResumed?.Invoke();
+        GameEventsManager.instance.inventoryEvents.CloseInventoryPanel();
+
+
         Time.timeScale = 1;
         //Debug.Log("Game Resumed");
 
@@ -121,6 +167,7 @@ public class PauseManager : MonoBehaviour
         if (pauseAction != null)
         {
             pauseAction.Enable();
+            inventoryShowCloseAction.Enable();
         }
 
         foreach (var animator in animators)
@@ -141,6 +188,8 @@ public class PauseManager : MonoBehaviour
         {
             pauseAction.performed -= OnPauseClick;
             pauseAction.Disable();
+
+
         }
     }
 }
