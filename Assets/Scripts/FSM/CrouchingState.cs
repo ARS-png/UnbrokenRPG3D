@@ -72,10 +72,10 @@ public class CrouchingState : State
         }
     }
 
-    public override void PhisicsUpdate()
+    public override void PhysicsUpdate()
     {
-        base.PhisicsUpdate();
-        //belowCeiling = CheckCollisionOverlap(character.transform.position + Vector3.up * character.normalColliderHeight);
+        base.PhysicsUpdate();
+   
         gravityVelocity.y = gravityValue * Time.deltaTime;
         grounded = character.controller.isGrounded;
         if (grounded && gravityVelocity.y < 0)
@@ -94,23 +94,4 @@ public class CrouchingState : State
 
 
     }
-
-    //public bool CheckCollisionOverlap(Vector3 targetPosition)
-    //{
-    //    int layerMask = 1 << 8;
-    //    layerMask = ~layerMask;
-    //    RaycastHit hit;
-
-    //    Vector3 direction = targetPosition - character.transform.position;
-    //    if (Physics.Raycast(character.transform.position, direction, out hit, character.normalColliderHeight, layerMask))
-    //    {
-    //        Debug.DrawRay(character.transform.position, direction * hit.distance, Color.yellow);
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        Debug.DrawRay(character.transform.position, direction * character.normalColliderHeight, Color.white);
-    //        return false;
-    //    }
-    //}
 }

@@ -1,22 +1,27 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class PickUpItem : Interactable
 {
-    [Header("Item Data")]
-    [SerializeField] string itemName;
+    [SerializeField] private InventoryItemSO itemSO;
 
+    public InventoryItemSO GetItemSO() => itemSO;
+
+   
+ 
     public override void Start()
     {
         base.Start();
-
-        interactableName = itemName;
+        
     }
 
     protected override void Interaction()
     {
         base.Interaction();
-        print("I put " + itemName + "in my inventory");
-        Destroy(this.gameObject);//уничтожается а не клладется в инвентарь
+        //print("I put " + interactableName + "in my inventory");
+
+        
+        GameEventsManager.instance.inventoryEvents.AddItemToInventory(itemSO, 1, this);
     }
 }

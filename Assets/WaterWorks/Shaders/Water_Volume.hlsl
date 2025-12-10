@@ -1,14 +1,14 @@
 #ifndef Water_Volume
 #define Water_Volume
-#include "Packages/com.unity.render.pipelines.universal/ShaderLibrary/Core.hlsl";
+//#include "Packages/com.unity.render.pipelines.universal/ShaderLibrary/Core.hlsl";
 
-CBUFFER_START(UnityPerMaterial)
+//CBUFFER_START(UnityPerMaterial)
 float4 _MainTex_ST; // Scale/offset дл€ текстуры
 float4 Albedo;
 float density;
 float3 pos;
 float3 bounds;
-CBUFFER_END
+//CBUFFER_END
 
 // “екстуры и семплеры объ€вл€ютс€ отдельно
 //TEXTURE2D(_MainTex);

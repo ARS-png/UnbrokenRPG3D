@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 136208339501781982}
   - component: {fileID: 136228401840113460}
   - component: {fileID: 65063927299647818}
-  m_Layer: 0
+  - component: {fileID: -4227203026862827239}
+  m_Layer: 17
   m_Name: PREF_sword_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4.3, y: 2.5, z: 6.2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6220526154651945216}
@@ -157,6 +158,22 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.041881084, y: 0.64, z: 0.0062444}
   m_Center: {x: 0, y: 0.38, z: 0}
+--- !u!114 &-4227203026862827239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286067045249696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 325f06818ab76484a9ea3aea36c3a53d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactableName: sword
+  interactionDistance: 2
+  isInteractable: 1
+  itemSO: {fileID: 11400000, guid: 82f98e13252b7774ebf41f3c6e433e8c, type: 2}
 --- !u!1 &1654369908695954570
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6220526154651945216}
   - component: {fileID: 3796563612159374951}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: DamageDealer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

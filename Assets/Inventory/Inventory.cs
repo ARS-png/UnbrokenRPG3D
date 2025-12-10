@@ -15,9 +15,9 @@ public class Inventory : MonoBehaviour //вроде как вообще не нужен
         actualItemMap = new Dictionary<string, Item>();
 
         AddItem("this");
-        Debug.Log("Count of items in actual inventory is: " + actualItemMap.Count);
+        //Debug.Log("Count of items in actual inventory is: " + actualItemMap.Count);
 
-        GameEventsManager.instance.inventoryEvents.ChangeInventory();
+      
     }
 
     private Dictionary<string, Item> CreateItemMap()
@@ -44,7 +44,7 @@ public class Inventory : MonoBehaviour //вроде как вообще не нужен
         if (actualItemMap.ContainsKey(id))
         {
             Debug.LogWarning($"Item {id} is already in the inventory. Cannot add duplicate.");
-            return; 
+            return;
         }
 
 
