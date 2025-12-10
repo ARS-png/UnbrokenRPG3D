@@ -15,7 +15,7 @@ public class CombatState : State
 
     bool sprintHeld;
 
-    //bool drawWeapon;
+  
     bool sheathWeapon;
     bool attack;
     bool superAttack;
@@ -108,12 +108,13 @@ public class CombatState : State
           
             stateMachine.ChangeState(character.standing);
         }
+
         if (superAttack)
         {
-            //character.animator.applyRootMotion = true ;
             character.animator.SetTrigger("superAttack");
             stateMachine.ChangeState(character.attacking);
         }
+
         if (attack)
         {
             character.animator.SetTrigger("attack");

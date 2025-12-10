@@ -98,6 +98,11 @@ public class GameStopManager : MonoBehaviour
 
     private void OnInventoryShowCloseClick(InputAction.CallbackContext context)
     {
+        if (Time.timeScale > 0)
+        {
+            isGamePaused = false;
+        }
+
         if (!isGameActive || isGamePaused) return;
 
         GameEventsManager.instance.inventoryEvents.ShowInventoryPanel();

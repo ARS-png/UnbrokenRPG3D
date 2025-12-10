@@ -12,6 +12,9 @@ public class InventoryUISystem : MonoBehaviour
 
     private readonly int amountToDeleteWhenClickOnItem = 1;
 
+    [SerializeField] Sprite defaultImageForButtons;
+
+
     private void Awake()
     {
         foreach (var button in GetComponentsInChildren<InventorySlotUI>(includeInactive: true))
@@ -79,7 +82,7 @@ public class InventoryUISystem : MonoBehaviour
     {
         if (FindFirstButton(inventorySlot, out InventorySlotUI inventorySlotUI))
         {
-            inventorySlotUI.ResetSlot();
+            inventorySlotUI.ResetSlot(defaultImageForButtons);
             inventorySlotUI.button.onClick.RemoveAllListeners();
         }
     }

@@ -11,7 +11,6 @@ public class State
     protected Vector2 input;
 
     public InputAction moveAction;
-    //public InputAction lookAction;
     public InputAction jumpAction;
     public InputAction crouchAction;
     public InputAction sprintAction;
